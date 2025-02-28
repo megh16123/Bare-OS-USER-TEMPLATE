@@ -1,0 +1,11 @@
+#!/bin/bash
+while true
+do
+	clear;
+	sleep 1;
+	sudo cat /dev/ttyACM0
+	if [ $? -eq 130 ]; then
+		break;
+	fi
+done
+echo ""

@@ -1,0 +1,11 @@
+#!/bin/bash
+cmake -B build && cmake --build build/ --parallel -j 12
+if [ $? -eq 0 ]; then
+sudo rmmod nbd
+sudo mount /dev/$(lsblk | sed -n '38p' | grep -o sd[a-z]*[0-9]) /mnt
+sudo cp build/*.uf2 /mnt
+sync
+./output
+else 
+	echo "Something Went Wrong"
+fi
